@@ -1,0 +1,19 @@
+<h2>Private</h2>
+<p>
+  <%= f.label :cover_image %>
+  <%= f.file_field(:cover_image, class: 'cover_image_uploader', place_holder: 'Attach') %>
+  <% if (@post.persisted? && @post.cover_image.file?) %>
+    <%= link_to "Remove", remove_cover_image_path, :method => :get %>
+  <% end %> <br>
+  <div class="cover_image_preview">
+    <% if (@post.cover_image.file?) %>
+      <%= image_tag @post.cover_image.url(:medium) %>
+    <% else %>
+      <img />
+    <% end %>
+  </div>
+</p>
+<p>
+  <%= f.label :summary %><br />
+  <%= f.text_area :summary %>
+</p>
