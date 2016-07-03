@@ -32,6 +32,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'paperclip', '~>4.2'  #git: "git://github.com/thoughtbot/paperclip.git"
+
+gem 'aws-sdk', '< 2.0'#'>= 2.0.34' 
+
+# needed for image encoding in post form, for storing image into sessions temporarily
+gem 'activesupport-json_encoder'
+
+# PREVENT COOKIE OVERFLOW when storing images in cookies (4 k limit)
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

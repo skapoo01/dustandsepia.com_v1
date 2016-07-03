@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :posts
 
   root to: 'posts#index'
+
+  get 'posts/:id/delete_image', to: 'posts#delete_image', as: 'remove_cover_image'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

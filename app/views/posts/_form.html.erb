@@ -18,6 +18,11 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "<< Previous", :name => "previous_button" unless @post.first_step? %>
+    <% button_label = "Next >>" %>
+    <% if @post.last_step? %>
+      <% button_label = "Submit" %>
+    <% end %>
+    <%= f.submit button_label %>
   </div>
 <% end %>
