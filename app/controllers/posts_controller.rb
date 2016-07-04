@@ -28,6 +28,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    session[:post_params] = {}
+    @post.first_step!                               
+    session[:post_step] = @post.current_step
   end
 
   # POST /posts
@@ -57,7 +60,7 @@ class PostsController < ApplicationController
       if params[:previous_button]
         @post.previous_step
       elsif @post.last_step? 
-        @post.save
+        @post.save if @post.all_elems_valid?
       else
         @post.next_step
       end
@@ -87,6 +90,37 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+
+    session[:post_params].deep_merge!(post_params.except(:cover_image))
+    img_before_update = true
+    if @post.cover_image.nil?
+      img_before_update = false
+      tmp_img = post_params[:cover_image]
+    end
+    @post.hash_to_post(session[:post_params])
+    if !img_before_update
+      @post.cover_image = tmp_img 
+    end
+    @post.current_step = session[:post_step]
+
+    if @post.valid?
+      if params[:previous_button]
+        @post.previous_step
+      elsif @post.last_step?
+        @post.update(post_params) if @post.all_elems_valid?
+      else
+        @post.next_step
+      end
+    end
+
+    session[:post_step] = @post.current_step
+
+    if @post.updated_at_changed? != nil           # WHY IS updated_at_changed? RETURNING FALSE
+      redirect_to @post, notice: 'Post was successfully updated'
+    else
+      render 'edit' 
+    end
+    %#
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -95,7 +129,7 @@ class PostsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
-    end
+    end #
   end
 
   # DELETE /posts/1
@@ -132,3 +166,7 @@ class PostsController < ApplicationController
       params.fetch(:post, {}).permit(:title, :body, :composed_on, :summary, :author, :cover_image)
     end
 end
+
+__END__
+
+put deletion of sessions variables in update and save instead of index
