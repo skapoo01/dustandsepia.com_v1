@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
 	validates_attachment_content_type :cover_image, content_type: /\Aimage\/.*\Z/
 	attr_writer :current_step #, :step # for security and remembering step on first 'Next >>'
 	validates_presence_of :title, :author, :composed_on, :body, :if => :public_step? 
-	validates_presence_of :cover_image, :summary, :if => :private_step?
+	validates_presence_of :summary, :if => :private_step?
 
 	def current_step
     		#@post = Post.find(params[:id])
