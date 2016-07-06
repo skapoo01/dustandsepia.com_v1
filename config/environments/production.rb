@@ -81,7 +81,7 @@ Rails.application.configure do
     :storage => :s3,
     :s3_credentials => {
       :region => 'US Standard',
-      :bucket => 'dns.cover.images'
+      :bucket => 'dns.production'
     } 
   }
 end
