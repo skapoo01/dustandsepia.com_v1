@@ -41,17 +41,25 @@
 	font-family: 'Debby';
 	src: url("/assets/Debby") format("truetype");
 }
-
+*/
 @font-face {
 	font-family: 'Debby';
 	src: font-url( asset-path("/assets/Debby.ttf")) format("truetype");
 }
-*/
 
+/*
 @font-face {
 	font-family: 'Debby';
 	src: url("Debby.ttf") format("truetype");
 }
+*/
+/*
+
+@font-face {
+	font-family: 'Debby';
+	src: url(http://s3-us-east-1.amazonaws.com/dns.production/Debby.ttf);
+}
+*/
 
 * {
 	font-size: 14px;
