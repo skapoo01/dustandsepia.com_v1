@@ -93,14 +93,14 @@ class PostsController < ApplicationController
 
     session[:post_params].deep_merge!(post_params.except(:cover_image))
     img_before_update = true
-    if @post.cover_image.nil?
+    if @post.cover_image_file_size.nil?
       img_before_update = false
       tmp_img = post_params[:cover_image]
+    else
+      tmp_img = @post.cover_image
     end
     @post.hash_to_post(session[:post_params])
-    if !img_before_update
-      @post.cover_image = tmp_img 
-    end
+    @post.cover_image = tmp_img 
     @post.current_step = session[:post_step]
 
     if @post.valid?
@@ -145,14 +145,13 @@ class PostsController < ApplicationController
   def delete_image
     @post = Post.find(params[:id])
     @post.cover_image.destroy
-    #@post.cover_image = nil
     @post.save
-    #redirect_to edit_post_path(@post), notice: 'Image removed'
-    #redirect_to @post, notice: 'Image removed'
-    redirect_to :back, notice: 'HERE'
+    #@post.save
+
+    #redirect_to :back, notice: 'HERE'
+    @post.current_step = session[:post_step]
+    render 'edit'
   end
-
-
   
 
   private

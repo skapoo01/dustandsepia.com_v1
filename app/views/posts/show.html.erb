@@ -1,16 +1,27 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<h1><%= @post.title %></h1>
-<p>By <%= @post.author %> on <%= @post.composed_on%></p>
-
-<% if (@post.cover_image.file?) %>
-   <%= image_tag @post.cover_image.url(:medium) %>
+<% if !@post.cover_image.size.nil? %>
+	<div class="post-show-page-cover" style="background-image: url('<%= @post.cover_image.url %>');">
+		<h1><%= @post.title %></h1>
+	</div>
 <% end %>
 
-<p><%= @post.body %></p>
 
-<%= button_to 'Edit', edit_post_path(@post), :method => "get" %>
-<%= button_to 'Back', posts_path, :method => "get" %>
+<div class="ui container" id="post-show-page">
+
+	<h1><%= @post.title %></h1>
+	<p>Written by <%= @post.author %> on <%= @post.composed_on%></p>
+
+	<div class="fr-view">
+		<%= @post.body.html_safe %>
+	</div>
+
+	<div class="post-show-buttons">
+		<%= button_to 'Edit', edit_post_path(@post), :method => "get" , :class => "ui right floated button"%> 
+		<%= button_to 'Back', posts_path, :method => "get", :class => "ui left floated button"%>
+	</div>
+
+</div>
 
 <%# link_to 'Edit', edit_post_path(@post) %>
 <%# link_to 'Back', posts_path %>

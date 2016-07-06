@@ -1,19 +1,37 @@
 <h2>Private</h2>
-<p>
+<div class="field">
   <%= f.label :cover_image %>
-  <%= f.file_field(:cover_image, class: 'cover_image_uploader', place_holder: 'Attach') %>
-  <% if (@post.persisted? && @post.cover_image.file?) %>
-    <%= link_to "Remove", remove_cover_image_path, :method => :get %>
-  <% end %> <br>
+
   <div class="cover_image_preview">
     <% if (@post.cover_image.file?) %>
-      <%= image_tag @post.cover_image.url(:medium) %>
+      <%= image_tag @post.cover_image.url, :class => "post-cover-image" %>
     <% else %>
-      <img />
+      <img class="post-cover-image"/>
     <% end %>
   </div>
-</p>
-<p>
+
+  <div class="post-form-image-buttons">
+    <div class="ui left floated button" id="file-field-button-aesthetic-hack">
+      Attach
+      <%= f.file_field(:cover_image, id: 'cover_image_uploader', class: 'ui button', title: '') %>
+    </div>
+    <% if (@post.persisted? && @post.cover_image.file?) %>
+      <%= link_to "Remove", remove_cover_image_path, :method => :get, :class => "ui right floated button" %>
+    <% end %> <br>
+  </div>
+  
+</div>
+<div class="field">
   <%= f.label :summary %><br />
-  <%= f.text_area :summary %>
-</p>
+  <%= f.text_area :summary, :id => "post-summary-editor" %>
+</div>
+
+<script>
+$(function() {
+  $('#post-summary-editor').froalaEditor({
+    height: 200
+  })
+});
+
+//$('.cover_image_preview').height(<%  %>);
+</script>

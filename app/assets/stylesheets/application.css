@@ -10,6 +10,427 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require froala_editor.min.css
+ *= require froala_style.min.css
+ *= require font-awesome
+ *= require plugins/char_counter.min.css
+ *= require plugins/code_view.min.css
+ *= require plugins/colors.min.css
+ *= require plugins/emoticons.min.css
+ *= require plugins/file.min.css
+ *= require plugins/fullscreen.min.css
+ *= require plugins/image_manager.min.css
+ *= require plugins/image.min.css
+ *= require plugins/line_breaker.min.css
+ *= require plugins/quick_insert.min.css
+ *= require plugins/table.min.css
+ *= require plugins/video.min.css
  *= require_tree .
  *= require_self
+ *= require semantic_ui/semantic_ui
  */
+
+
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,300,700|Rock+Salt|Homemade+Apple);
+
+/*------------------------------------------------------------
+		     SHALLOW OVERRIDE THEME
+-------------------------------------------------------------*/
+
+@font-face {
+	font-family: 'Debby';
+	src: url("/assets/Debby");
+	
+}
+
+* {
+	font-size: 14px;
+	font-family: 'Arial';
+}
+
+.ui.container h1 {
+	
+}
+
+/*------------------------------------------------------------
+			    APP WIDE
+-------------------------------------------------------------*/
+
+.ui.top.menu {
+	height: 4em;
+}
+
+.ui.menu #dns-logo {
+	width: 20em;
+	display: block;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 0;
+	margin-top: -0.2em;
+	overflow: hidden;
+	
+}
+
+#dns-logo a {
+	display: block;
+	font-family: 'Debby';
+	font-size: 52px;
+
+	letter-spacing: 3px;
+}
+
+#sections-menu {
+	position: relative;
+	/*
+	border-width: 0.5px; 
+	border-color: red; 
+	border-style: solid;
+	*/
+}
+
+#sections-menu .active.item {
+	border-bottom-width: 5px;
+	border-bottom-color: white;
+	border-bottom-style: solid;
+}
+
+#sections-menu a {
+	display: inline-block;
+	position: relative;
+	height: 4em;
+	margin-bottom: -0.1em;
+	padding-top: 1.6em;
+	/*
+	border-width: 0.1px; 
+	border-color: white; 
+	border-style: solid; 	
+	*/
+}
+
+.ui.right.inverted.menu {
+	display: block;
+	width: 25%;
+	/*
+	border-width: 0.1px; 
+	border-color: white; 
+	border-style: solid; 
+	*/
+}
+
+.ui.right.inverted.menu .item {
+	width: 100%;
+	padding: 0.8em;
+	text-align: right;
+	/*
+	border-width: 0.1px; 
+	border-color: white; 
+	border-style: solid; 
+	*/
+}
+
+#nav-search-bar {
+	/*opacity: 0.5; */
+	position: relative;
+	height: 100%;
+	padding-left: 3%;
+
+	border-width: 0.5px; 
+	border-color: #a6a6a6; 
+	border-style: solid; 
+	
+}
+
+#nav-search-bar i {
+	margin-right: 3%;
+}
+
+
+#website-content {
+	display: block;
+	margin-top: 3.3em;
+	padding-top: 0em;
+	width: 100%; 
+
+	min-height: 100vh;
+	background-color: #f2f2f2;
+	
+	border-color: #000000;
+	border-style: dotted;
+	border-width: 0.5px;
+	
+}
+
+#development-debuggers {
+	width: 95%;
+	/*position: absolute; CONFLICTS WITH UI CONTAINER */
+	margin-top: 5%;
+	margin-bottom: 15%;
+	left: 50%;
+	margin-left: -45%;
+
+	border-color: red;
+	border-style: dotted;
+	border-width: 0.5px;
+}
+
+#notice {
+	position: fixed;
+	width: 100%;
+	top: 3em;
+	height: 3em;
+	vertical-align: middle;
+	padding-bottom: 2.2em;
+
+	/*
+	margin-top: 2.5em;
+	
+	height: 2em;
+	z-index: 100;
+	line-height: 2em;
+	padding-top: 0;
+	*/
+
+	background-color: #008ae6;
+	color: white;
+	border-radius: 0px;
+
+}
+
+/*------------------------------------------------------------
+			POST STYLING
+-------------------------------------------------------------*/
+
+/*---------------------- POST LAYOUTS -----------------------*/
+
+#post-index-page, #post-edit-page, #post-show-page, #post-new-page {
+	display: block;
+	position: relative;
+	padding: 1em;
+	background-color: white;
+
+	/*
+	border-color: #0000ff;
+	border-width: 1px;
+	border-style: solid;
+	*/
+}
+
+#post-index-page, #post-edit-page, #post-new-page {
+	margin-top: 0em;
+}
+
+#post-new-page, #post-edit-page {
+	/*margin-top: 2em;
+	margin-bottom: 2em;*/
+	margin: 4em;
+	width: 65%;
+}
+
+#post-index-page {
+	width: 90%;
+	margin: 4em;
+}
+
+#post-show-page {
+	width: 65%;
+	margin-bottom: 4em;
+	padding: 2em;
+}
+
+.post-show-page-cover /*.post-cover-image */{
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 100%;
+
+	padding-top: 56.25%;
+	display: block;
+	padding-bottom: 0;
+	margin-top: -1.7em; /* WHY SO ODD */
+
+	vertical-align: middle;
+	text-align: center;
+
+	background-size: 100% auto;
+	background-position: center center;
+	
+	border-color: #ff0000;
+	border-width: 1px;
+	border-style: solid;
+	
+}
+
+/*
+----------------CENTERING TEXT ON COVER--------------------
+*/
+
+.post-show-page-cover h1 {
+	display: block;
+	height: 70%;
+	width: 80%;
+	font-family: 'Debby';
+	letter-spacing: 3px;
+	/*font-size: 80px;*/
+	font-size: 6vw;
+	color: white;
+	text-shadow: 1px 1px 5px #8c8c8c;
+
+	position: absolute;
+	top: 15%;
+	left: 10%;
+	text-align: center;
+	padding-top: 15vw;
+	/*
+	border-color: #ff0000;
+	border-width: 1px;
+	border-style: solid;
+	*/
+}
+
+.post-show-page-banner {
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 15em;
+	display: block;
+	padding-top: 0;
+	padding-bottom: 0;
+	
+	border-color: #ff0000;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.post-show-page-cover .post-cover-image {
+	position: relative;
+	width: 100%;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding-bottom: 0;
+	/*
+	border-color: #00ff00;
+	border-width: 1px;
+	border-style: solid;
+	*/
+}
+
+/*
+#post-edit-page {
+	width: 100%;
+}
+
+#post-show-page {
+	width: 100%;
+}
+
+#post-new-page {
+	width: 100%;
+} */
+
+/*---------------------- POST FORMS -------------------------*/
+
+.ui.button {
+	width: 10em;	
+	height: 3em;
+}
+
+.post-index-new-post-button {
+	text-align: right;
+}
+
+.post-form-buttons {
+	margin-top: 2%;
+	bottom: 0;
+	display: inline-block;
+	width: 100%;
+	height: 3em;
+	/*
+	border-color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	*/
+}
+
+#post-new-page-back-button {
+	position: absolute;
+	left: 50%;
+	margin-left: -5%;
+	margin-top: -3.25em;
+}
+
+#post-edit-page-back-button {
+	position: absolute;
+	left: 50%;
+	margin-left: -5%;
+	margin-top: -3.25em;
+}
+
+#file-field-button-aesthetic-hack {
+	height: 3em;
+	display: inline-block;
+	padding: 0;
+	line-height: 2.5em; /* CRAZY HACK FOR FIXING ATTACH IMAGE BUTTON TEXT*/
+
+	/*
+	border-color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	*/
+}
+
+#file-field-button-aesthetic-hack #cover_image_uploader {
+	opacity: 0;
+	position: relative;
+	margin-top: -10%;
+	float: left;
+	/*
+	border-color: #000000;
+	border-style: dotted;
+	border-width: 0.7px;
+	*/
+}
+
+.post-form-image-buttons {
+	width: 100%;
+	height: 3em;
+	bottom: 0;
+	display: inline-block;
+	margin-top: 2%;
+	
+	/*
+	border-color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	*/
+}
+
+.post-show-buttons {
+	width: 100%;
+	height: 3em;
+	bottom: 0;
+	display: inline-block;
+	margin-top: 2%;
+	
+	/*
+	border-color: #ff0000;
+	border-style: solid;
+	border-width: 1px;
+	*/
+	
+}
+
+.cover_image_preview {
+	width: 100%;
+
+	/*
+	border-color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	*/
+}
+
+.cover_image_preview .post-cover-image {
+	width: 100%;
+}
+

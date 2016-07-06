@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
 	has_attached_file :cover_image, styles: {medium: "300x300>", thumb: "100x100>"} #default_url: "/images/:style/missing.png"
 	validates_attachment_content_type :cover_image, content_type: /\Aimage\/.*\Z/
 	attr_writer :current_step #, :step # for security and remembering step on first 'Next >>'
-	validates_presence_of :title, :author, :composed_on, :body, :if => :public_step?
+	validates_presence_of :title, :author, :composed_on, :body, :if => :public_step? 
 	validates_presence_of :cover_image, :summary, :if => :private_step?
 
 	def current_step

@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var preview = $(".cover_image_preview img");
 
-    $(".cover_image_uploader").change(function(event){
+    $("#cover_image_uploader").change(function(event){
        var input = $(event.currentTarget);
        var file = input[0].files[0];
        var reader = new FileReader();
@@ -10,10 +10,8 @@ $(document).ready(function(){
        reader.onload = function(e){
            image_base64 = e.target.result;
            preview.attr("src", image_base64);
-           if (ht <= wd)
-            preview.attr("width", 300);
-           else
-            preview.attr("height", 300);
+           preview.attr("width", $(".cover_image_preview").width());
+           preview.attr("height", ($(".cover_image_preview").width() / wd) * ht);
        };
        reader.readAsDataURL(file);
     });

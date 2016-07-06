@@ -1,6 +1,6 @@
 <%= javascript_include_tag 'postjs' %>
 
-<%= form_for(@post) do |f| %>
+<%= form_for(@post, :html => {:class => "ui form", :id => "create_post_form"}) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -17,12 +17,16 @@
       <%= render "#{@post.current_step}_step", :f => f %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "<< Previous", :name => "previous_button" unless @post.first_step? %>
+  <div class="post-form-buttons">
+    <%= f.submit "<< Previous", :name => "previous_button", :class => "ui left floated button"  unless @post.first_step? %>
     <% button_label = "Next >>" %>
     <% if @post.last_step? %>
       <% button_label = "Submit" %>
+      <% button_class = "ui right floated primary button" %>
+    <% else %>
+      <% button_class = "ui right floated button"%>
     <% end %>
-    <%= f.submit button_label %>
+    <%= f.submit button_label, :class => button_class %>
   </div>
 <% end %>
+

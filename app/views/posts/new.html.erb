@@ -1,5 +1,9 @@
-<h1>Create New Post</h1>
+<div class="ui container" id="post-new-page">
 
-<%= render 'form' %>
+	<h1>Create New Post</h1>
 
-<%= button_to 'Back', posts_path, :method => "get" %>
+	<%= render 'form' %>
+
+	<%= button_to 'Back', posts_path, :method => "get", :class => "ui button", :id => "post-new-page-back-button" %>
+
+</div>

@@ -13,11 +13,70 @@
 </head>
 <body>
 
-<p id="notice"><%= notice %></p>
-<%= yield %>
-<%= debug(params) %>
-<%= debug(session[:post_params]) %>
-<%= console %>
+<div class="ui top fixed inverted borderless menu">
+
+  <div class="item" id="dns-logo">
+    <%= link_to 'Dust&Sepia', posts_path, :method => "get", :class => "logo"%>
+  </div>
+
+  <div class="ui inverted secondary pointing menu" id="sections-menu">
+    <a class="active item">One</a>
+    <a class="item">Two</a>
+    <a class="item">Three</a>
+    <a class="item">Four</a>
+  </div>
+
+  <script>
+    var menu_width = $("#sections-menu").width();
+    var logo_width = $("#dns-logo").width();
+
+    $("#sections-menu").css({left: ($(document).width() / 2) - 1.3*logo_width});
+    $("#sections-menu").css("margin-left", "-" + menu_width/2 + "px");
+
+    $(window).resize(function(){
+        $("#sections-menu").css({left: ($(document).width() / 2) - 1.3*logo_width});
+        $("#sections-menu").css("margin-left", "-" + menu_width/2 + "px");
+    });
+  </script>
+
+  <div class="ui right inverted menu">
+    <div class="item">
+      <div class="ui transparent icon input" id="nav-search-bar">
+        <input type="text" class="search-bar-input" placeholder="Search..." style="color: white;">
+        <i class="search link icon" style="color:white;"></i>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="ui container" id="website-content"> 
+	<%= yield %>
+</div>
+
+<% if notice %>
+   <div class ="ui message" id="notice">
+      <i class="close icon"></i>
+      <%= notice %>
+  </div>
+<% end %>
+
+<script>
+  $('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  });
+</script>
+
+<div class="ui container" id="development-debuggers">
+	<%= debug(params) if Rails.env.development? %>
+	<%# debug(session[:post_params]) %>
+	<%# console %>
+</div>
 
 </body>
 </html>

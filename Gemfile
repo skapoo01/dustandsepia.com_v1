@@ -42,6 +42,18 @@ gem 'activesupport-json_encoder'
 # PREVENT COOKIE OVERFLOW when storing images in cookies (4 k limit)
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
+# Use Semantic UI for front-end
+gem 'less-rails-semantic_ui', '~> 2.2.1'
+gem 'autoprefixer-rails' 
+
+# Using less - which is a dependency for Semantic UI Less gem
+gem 'less-rails', '~> 2.7.0'
+gem 'therubyracer'
+
+# froala text editor
+gem "wysiwyg-rails"
+gem "font-awesome-rails"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
