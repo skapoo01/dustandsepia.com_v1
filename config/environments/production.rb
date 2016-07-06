@@ -83,5 +83,8 @@ Rails.application.configure do
       :region => 'us-east-1',
       :bucket => 'dns.production'
     } 
+
+  config.action_controller.asset_host = "http://s3-us-east-1.amazonaws.com/dns.production"
+  
   }
 end
