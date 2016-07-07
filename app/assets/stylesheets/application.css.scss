@@ -44,9 +44,40 @@
 */
 
 @font-face {
+	font-family: 'Infinity';
+	src: font-url( asset-path("/assets/Infinity.ttf")) format("truetype");
+}
+
+@font-face {
 	font-family: 'Debby';
 	src: font-url( asset-path("/assets/Debby.ttf")) format("truetype");
 }
+
+@font-face {
+	font-family: 'Ailerons';
+	src: font-url( asset-path("/assets/Ailerons-Typeface.otf"));
+}
+
+@font-face {
+	font-family: 'Manifesto';
+	src: font-url( asset-path("/assets/MANIFESTO.ttf"));
+}
+
+@font-face {
+	font-family: 'Glamor';
+	src: font-url( asset-path("/assets/Glamor-Regular.otf"));
+}
+
+@font-face {
+	font-family: 'Metrica';
+	src: font-url( asset-path("/assets/Metrica-Regular.otf"));
+}
+
+@font-face {
+	font-family: 'Arkhip';
+	src: font-url( asset-path("/assets/Arkhip_font.ttf"));
+}
+
 
 /*
 @font-face {
@@ -80,22 +111,27 @@
 }
 
 .ui.menu #dns-logo {
-	width: 20em;
+	width: 10em;
 	display: block;
 	text-align: center;
 	vertical-align: middle;
-	padding-top: 0;
-	margin-top: -0.2em;
+	padding-top: 0.5em;
+	margin-top: 0em;
 	overflow: hidden;
-	
+	/*
+	border-width: 0.5px; 
+	border-color: red; 
+	border-style: solid;
+	*/
 }
 
 #dns-logo a {
 	display: block;
-	font-family: 'Debby';
-	font-size: 52px;
+	font-size: 32px;
 
-	letter-spacing: 3px;
+	font-family: 'Metrica';
+	font-weight: 1px;
+	letter-spacing: -2px;
 }
 
 #sections-menu {
@@ -210,6 +246,7 @@
 	*/
 
 	background-color: #008ae6;
+	opacity: 0.75;
 	color: white;
 	border-radius: 0px;
 
@@ -272,11 +309,11 @@
 
 	background-size: 100% auto;
 	background-position: center center;
-	
+	/*
 	border-color: #ff0000;
 	border-width: 1px;
 	border-style: solid;
-	
+	*/
 }
 
 /*
@@ -287,15 +324,15 @@
 	display: block;
 	height: 70%;
 	width: 80%;
-	font-family: 'Debby';
-	letter-spacing: 3px;
+	font-family: Arial;
+	letter-spacing: -5px;
 	/*font-size: 80px;*/
 	font-size: 6vw;
 	color: white;
 	text-shadow: 1px 1px 5px #8c8c8c;
 
 	position: absolute;
-	top: 15%;
+	top: 13%;
 	left: 10%;
 	text-align: center;
 	padding-top: 15vw;
