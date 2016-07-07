@@ -102,6 +102,10 @@
 	
 }
 
+input[type='checkbox'] {
+	border-radius: 0;
+}
+
 /*------------------------------------------------------------
 			    APP WIDE
 -------------------------------------------------------------*/
@@ -273,6 +277,7 @@
 
 #post-index-page, #post-edit-page, #post-new-page {
 	margin-top: 0em;
+	padding: 0;
 }
 
 #post-new-page, #post-edit-page {
@@ -490,3 +495,131 @@
 	width: 100%;
 }
 
+/*----------------------POST PRIVATE INDEX-------------------- */
+
+#private-index-table {
+	/*
+	border-color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	*/
+	display: block;
+	position: relative;
+	width: 100%;
+
+	border-radius: 0;
+	border-collapse: collapse;
+	white-space: nowrap;
+}
+
+#private-index-table td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipses;
+}
+
+#private-index-table tr {
+	margin-bottom: 5em;
+}
+
+#private-index-table thead tr th {
+	border-radius: 0;
+	background-color: #1c1c1c;
+	color: white; 
+	height: 3em;
+	text-align: center;
+}
+
+#private-index-table tbody tr {
+	position: relative;
+	height: 5em;
+}
+
+#private-index-table #composed {
+	width: 10%;
+}
+#private-index-table #created {
+	width: 10%;
+}
+#private-index-table #description {
+	width: 65%;
+}
+#private-index-table #published {
+	width: 5%;
+}
+#private-index-table #commenting {
+	width: 5%;
+}
+#private-index-table #rating {
+	width: 5%;
+}
+
+#private-index-table tbody tr td {
+	position: relative;
+	padding: 1em;
+	padding-bottom: 0;
+	margin-bottom: 1em;
+	text-align: center;
+	/*
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	*/
+}
+
+#private-index-table tbody tr .description-body {
+	text-align: left;
+}
+
+#private-index-table tbody tr td h5 {
+	position: relative;
+	display: block;
+	margin-top: 0;
+	margin-bottom: 0.1em;
+	/*
+	border-color: green;
+	border-style: solid;
+	border-width: 1px;
+	*/
+}
+
+#private-index-table tbody tr td div {
+	position: relative;
+	display: block;
+	margin-top: 0;
+	width: 100%;
+	height: 2.7em;
+	overflow: hidden;
+	text-overflow: ellipses;
+
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+     	white-space: -pre-wrap;      /* Opera 4-6 */
+     	white-space: -o-pre-wrap;  
+	white-space: pre-wrap;       /* css-3 */
+     	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+     	word-break: break-all;
+     	white-space: normal;
+     	/*
+	border-color: blue;
+	border-style: solid;
+	border-width: 1px;
+	*/
+}
+
+#private-index-table tbody tr td .index-post-buttons {
+	display: inline-block;
+	width: 5em;
+	height: 1.7em;
+	position: relative;
+	text-align: right;
+	float: right;
+	z-index: 10;
+	margin-right: -0.5em;
+	/*background-color: rgba(255, 255, 255, 0.9);
+*/
+	/*
+	border-color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	*/
+}
