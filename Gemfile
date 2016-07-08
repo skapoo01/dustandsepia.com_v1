@@ -54,6 +54,8 @@ gem 'therubyracer'
 gem "wysiwyg-rails"
 gem "font-awesome-rails"
 
+gem 'devise'
+
 # heroku dependencies
 gem 'rails_12factor', group: :production
 
