@@ -1,8 +1,63 @@
+<div class="ui top attached menu">
+
+    <div class="ui dropdown item">
+      Actions
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <div class="item">Add to slider</div>
+        <div class="item">Clear slider</div>
+        <div class="item">Publish</div>
+        <div class="item">Hide</div>
+        <div class="item">Destroy</div>
+        <div class="item">Feature</div>
+        <div class="item">Enable Commenting</div>
+        <div class="item">Disable Commenting</div>
+      </div>
+    </div>
+
+    <div class="ui dropdown item">
+      Navigate
+      <i class="folder icon"></i>
+      <div class="menu">
+        <div class="item">Sections
+            <div class="menu">
+            <div class="item">Fiction</div>
+            <div class="item">Non-Fiction</div>
+            <div class="item">Poetry</div>
+            <div class="item">Blog</div>
+            <div class="item">Web</div>
+            </div>
+        </div>
+        <div class="item">Series
+            <div class="menu">
+            <div class="item">Immigration</div>
+            <div class="item">Death on Rails</div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $('.ui.dropdown')
+        .dropdown()
+      ;
+    </script>
+
+    <div class="ui icon input">
+      <i class="search icon"></i>
+      <input type="text" placeholder="Search...">
+    </div>
+
+    <div class="item" id="post-index-new-button">
+    <%= link_to 'New', new_post_path %>
+    <i class="write icon"></i>
+    </div>
+</div>
+
+
+
 <div class="ui container" id="post-index-page">
-
-  <h1>Listing Posts</h1>
-
-  <table class="ui table" id="private-index-table">
+  <table class="ui unstackable table" id="private-index-table">
     <thead>
       <tr>
         <th id="checkbox"></th>
@@ -19,9 +74,9 @@
       <% @posts.each do |post| %>
         <%# link_to(post) do %>
           <tr>
-            <td><input type="checkbox"> <label></label></td>
-            <td><%= post.created_at.to_date.to_formatted_s(:long) %></td>
-            <td><%= post.composed_on.to_formatted_s(:long) %></td>
+            <td class="checkbox-column"><input type="checkbox"> <label></label></td>
+            <td class="created-column"><%= post.created_at.to_date.to_formatted_s(:long) %></td>
+            <td class="composed-column"><%= post.composed_on.to_formatted_s(:long) %></td>
             <td class="description-body">
               <h5><%= post.title %></h5>
               <div class="fr-view"><%= post.body.html_safe %></div>
@@ -57,9 +112,5 @@
     </tbody>
   </table>
 
-  <br>
-
-  <div class="post-index-new-post-button">
-    <%= link_to 'New Post', new_post_path, :class => "ui primary button" %>
-  </div>
+  
 </div>

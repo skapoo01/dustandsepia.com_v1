@@ -205,10 +205,14 @@ input[type='checkbox'] {
 
 
 #website-content {
+	box-sizing: border-box;
 	display: block;
+	position: relative;
 	margin-top: 3.3em;
 	padding-top: 0em;
 	width: 100%; 
+	min-width: 65em;
+
 
 	min-height: 100vh;
 	background-color: #f2f2f2;
@@ -216,7 +220,6 @@ input[type='checkbox'] {
 	border-color: #000000;
 	border-style: dotted;
 	border-width: 0.5px;
-	
 }
 
 #development-debuggers {
@@ -283,13 +286,23 @@ input[type='checkbox'] {
 #post-new-page, #post-edit-page {
 	/*margin-top: 2em;
 	margin-bottom: 2em;*/
+	padding: 1em;
 	margin: 4em;
 	width: 65%;
 }
 
 #post-index-page {
 	width: 90%;
-	margin: 4em;
+	margin-top: 4em;
+	margin-right: 5%;
+	margin-left: 5%;
+
+	min-width: 58em !important;
+	/*
+	border-color: #0000ff;
+	border-width: 1px;
+	border-style: solid;
+	*/
 }
 
 #post-show-page {
@@ -394,10 +407,6 @@ input[type='checkbox'] {
 .ui.button {
 	width: 10em;	
 	height: 3em;
-}
-
-.post-index-new-post-button {
-	text-align: right;
 }
 
 .post-form-buttons {
@@ -510,6 +519,8 @@ input[type='checkbox'] {
 	border-radius: 0;
 	border-collapse: collapse;
 	white-space: nowrap;
+
+	min-width: 30em;
 }
 
 #private-index-table td {
@@ -527,7 +538,7 @@ input[type='checkbox'] {
 	background-color: #1c1c1c;
 	color: white; 
 	height: 3em;
-	text-align: center;
+	text-align: center
 }
 
 #private-index-table tbody tr {
@@ -535,11 +546,15 @@ input[type='checkbox'] {
 	height: 5em;
 }
 
+#private-index-table #checkbox {
+	width: 6%;
+}
+
 #private-index-table #composed {
-	width: 10%;
+	width: 7%;
 }
 #private-index-table #created {
-	width: 10%;
+	width: 7%;
 }
 #private-index-table #description {
 	width: 65%;
@@ -565,10 +580,24 @@ input[type='checkbox'] {
 	border-style: solid;
 	border-width: 1px;
 	*/
+	
 }
 
 #private-index-table tbody tr .description-body {
+	vertical-align: middle;
 	text-align: left;
+}
+
+#private-index-table tbody tr .created-column {
+	padding: 0.3em;
+}
+
+#private-index-table tbody tr .composed-column {
+	padding: 0.3em;
+}
+
+#private-index-table tbody tr .checkbox-column {
+	padding: 0.3em;
 }
 
 #private-index-table tbody tr td h5 {
@@ -603,7 +632,7 @@ input[type='checkbox'] {
 	border-color: blue;
 	border-style: solid;
 	border-width: 1px;
-	*/
+	*/ 
 }
 
 #private-index-table tbody tr td .index-post-buttons {
@@ -622,4 +651,70 @@ input[type='checkbox'] {
 	border-style: solid;
 	border-width: 1px;
 	*/
+
+}
+
+.ui.top.attached.menu {
+	position: relative !important;
+	height: 4em;
+	margin-bottom: -1.2em;
+	width: 90%;
+	margin-top: 4em !important;
+	margin-left: 5%;
+	min-width: 58em;
+	/*
+	border-color: transparent !important;
+	border-style: solid;
+	border-width: 1px;
+	*/
+	border-radius: 0px;
+}
+
+.ui.top.attached.menu .ui.dropdown.item {
+	width:10%;
+	/*
+	border-color: yellow !important;
+	border-style: solid;
+	border-width: 1px;
+	*/
+	border-radius: 0px;
+}
+
+.ui.top.attached.menu .post-index-new-post-button {
+	width: 12%;
+	display: block;
+	position: relative;
+	margin-right: 0;
+	vertical-align: middle;
+	text-align: center;
+	/*
+	border-color: blue;
+	border-style: solid;
+	border-width: 1px;
+	*/
+}
+
+.ui.top.attached.menu #post-index-new-button {
+	position: relative;
+	width: 12%;
+	height: 4em; 
+	text-align: right !important;
+	padding-left: 3.5%;
+} 
+
+#post-index-new-button a {
+	color: black;
+}
+
+#post-index-new-button i {
+	color: #00b359;
+}
+
+.ui.top.attached.menu .ui.icon.input {
+	width: 68%;
+	border-color: transparent !important;
+}
+
+.ui.top.attached.menu .ui.icon.input .input {
+	border-radius: 0 !important;
 }
