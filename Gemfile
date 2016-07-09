@@ -54,6 +54,7 @@ gem 'therubyracer'
 gem "wysiwyg-rails"
 gem "font-awesome-rails"
 
+#for authentification
 gem 'devise'
 
 # heroku dependencies

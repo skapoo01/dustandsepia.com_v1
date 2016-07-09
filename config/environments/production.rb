@@ -86,6 +86,8 @@ Rails.application.configure do
       :bucket => 'dns.production'
     } 
   }
+
+  config.action_mailer.default_url_options = { host: 'infinite-cove-81588.herokuapp.com'}
   
 #  config.action_controller.asset_host = "http://s3-us-east-1.amazonaws.com/dns.production"
 

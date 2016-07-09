@@ -12,8 +12,9 @@
         <div class="item">Feature</div>
         <div class="item">Enable Commenting</div>
         <div class="item">Disable Commenting</div>
-        <%= link_to 'Create new user', new_user_path, class: "item" %>
+        <%= link_to 'Create new user', new_user_registration_path, class: "item" %>
         <%= link_to 'Users console', users_path, class: "item" %>
+        <%= link_to 'Sign Out', destroy_user_session_path, class: "item", :method => :delete %>
       </div>
     </div>
 

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   get 'posts/:id/delete_image', to: 'posts#delete_image', as: 'remove_cover_image'
 
+  devise_scope :user do
+    get 'captainmycaptain', to: 'devise/sessions#new'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

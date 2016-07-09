@@ -259,6 +259,29 @@ input[type='checkbox'] {
 
 }
 
+#alert {
+	position: fixed;
+	width: 100%;
+	top: 3em;
+	height: 3em;
+	vertical-align: middle;
+	padding-bottom: 2.2em;
+
+	/*
+	margin-top: 2.5em;
+	
+	height: 2em;
+	z-index: 100;
+	line-height: 2em;
+	padding-top: 0;
+	*/
+
+	background-color: red;
+	opacity: 0.75;
+	color: white;
+	border-radius: 0px;
+
+}
 /*------------------------------------------------------------
 			POST STYLING
 -------------------------------------------------------------*/
