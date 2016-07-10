@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
 	validates_presence_of :title, :author, :composed_on, :body, :if => :public_step? 
 	validates_presence_of :summary, :if => :private_step?
 
+  belongs_to :users
+
 	def current_step
     		#@post = Post.find(params[:id])
     		@current_step || steps.first

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	 #def new
+	#def new
   #	 	@user = User.new
   #end
   
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   #  		else
   #    			render "new"
   #  		end
- # 	end
+  #	end
 
   #	private
 	# Use callbacks to share common setup or constraints between actions.

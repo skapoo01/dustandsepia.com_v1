@@ -3,20 +3,15 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
- 
   attr_accessor :login
-
   validates :username,
   :presence => true,
   :uniqueness => {
     :case_sensitive => false
   }
-
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-
-
-validate :validate_username
-
+  validate :validate_username
+  has_many :students 
 
 
 

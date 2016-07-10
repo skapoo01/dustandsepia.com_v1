@@ -1,0 +1,38 @@
+<div id="home-page" ><div class="ui container" id="home-page-slider">
+
+	<div class="slider-social">
+		
+	</div><div class="slider-contents">
+
+	</div>
+</div><div class="ui container" id="home-page-contents">
+
+	<div class="ui grid" id="home-page-grid">
+
+	<div class="doubling five column row">
+		<% @posts.each do |post| %>
+			<% if !post.cover_image.size.nil? %>
+				<div class="column img" style="background-image: url('<%= post.cover_image.url(:medium) %>');">
+				<div class="title-box">
+				<div><%= post.title.downcase %></div>
+				</div>
+				</div>
+			<% else %>	
+				<div class="column no-img">
+					<h3><%= post.title %></h3>
+					<div class="fr-view">
+						<%= post.body.html_safe %>
+					</div>
+				</div>
+
+			<% end %>
+		<% end %>
+		
+	</div>
+
+	</div><div class="ui container" id="widgets">
+
+	</div>
+
+</div>
+</div>

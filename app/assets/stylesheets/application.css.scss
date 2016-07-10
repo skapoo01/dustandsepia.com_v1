@@ -288,7 +288,7 @@ input[type='checkbox'] {
 
 /*---------------------- POST LAYOUTS -----------------------*/
 
-#post-index-page, #post-edit-page, #post-show-page, #post-new-page {
+#post-index-page, #post-edit-page, #post-show-page, #post-new-page, #home-page, #home-page-slider, #home-page-contents {
 	display: block;
 	position: relative;
 	padding: 1em;
@@ -299,6 +299,110 @@ input[type='checkbox'] {
 	border-width: 1px;
 	border-style: solid;
 	*/
+}
+
+#home-page {
+	padding: 0;
+	text-align: left;
+	min-width: 50em;
+
+	border-color: #0000ff;
+	border-width: 1px;
+	border-style: solid;
+}
+
+#home-page-slider, #home-page-content, #home-page-grid, #widgets {
+	border-color: #0000ff;
+	border-width: 1px;
+	border-style: solid;
+}
+
+#home-page-slider {
+	margin-top: -3.4em;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+	border-color: #0000ff;
+	border-width: 1px;
+	border-style: solid;
+}
+
+#home-page-slider .slider-social, .slider-contents{
+	display: inline-block;
+	margin: 0;
+	height: 100%;
+	width: 20%;
+
+	padding-top: 60vh;
+	padding-left: 2.5vw;
+
+	border-color: red;
+	border-width: 1px;
+	border-style: solid;
+}
+
+#home-page-slider .slider-contents {
+	width: 80%;
+}
+
+#home-page-contents {
+	background-color: transparent;
+	width: 100%;
+	padding: 0;
+}
+
+#home-page-contents #home-page-grid {
+	display: inline-block;
+	vertical-align: top;
+	width: 80%;
+	margin: 0;
+	min-height: 50em;
+
+}
+
+#home-page-contents #home-page-grid .column {
+	border-color: red;
+	border-width: 1px;
+	border-style: solid;
+	padding-top: 0em;
+
+	height: 18em;
+	background-size: auto 100%;
+	background-position: center center;
+}
+
+#home-page-contents #home-page-grid .column.img .title-box {
+	display: table;
+	background-color: white;
+	opacity: 0.85;
+	color: black;
+	height: 5em;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 11em;
+	text-align: center;
+}
+
+#home-page-contents #home-page-grid .column.no-img {
+	padding: 2%;
+	overflow: hidden;
+}
+
+.column.no-img h3 {
+	font-size: 25px;
+}
+
+
+#home-page-contents #home-page-grid .column.img .title-box div {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 12px;
+}
+
+#home-page-contents #widgets {
+	display: inline-block;
+	width: 20%;
+	min-height: 30em;
 }
 
 #post-index-page, #post-edit-page, #post-new-page {
@@ -640,7 +744,7 @@ input[type='checkbox'] {
 	display: block;
 	margin-top: 0;
 	width: 100%;
-	height: 2.7em;
+	height: 2.6em;
 	overflow: hidden;
 	text-overflow: ellipses;
 

@@ -1,10 +1,17 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :except => [:show]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if current_user.admin?
+      @posts = Post.all
+      @users = User.all.order("id")
+    else
+      @posts = Post.where(user_id: current_user.id)
+    end
+    #@posts = Post.all
     session.delete(:post_params)                    # In case back is pressed
     session.delete(:post_step)                      # remove sessions variables for post form
   end
@@ -28,6 +35,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    if !(current_user.admin? || @post.user_id == current_user.id)
+      redirect_to posts_path, alert: 'Access denied'
+    end
     session[:post_params] = {}
     @post.first_step!                               
     session[:post_step] = @post.current_step
@@ -60,6 +70,7 @@ class PostsController < ApplicationController
       if params[:previous_button]
         @post.previous_step
       elsif @post.last_step? 
+        @post.user_id = current_user.id ################################################
         @post.save if @post.all_elems_valid?
       else
         @post.next_step
@@ -91,6 +102,10 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
 
+    if !(current_user.admin? || @post.user_id == current_user.id)
+      redirect_to posts_path, alert: 'Access denied'
+    end
+
     session[:post_params].deep_merge!(post_params.except(:cover_image))
     img_before_update = true
     if @post.cover_image_file_size.nil?
@@ -107,6 +122,7 @@ class PostsController < ApplicationController
       if params[:previous_button]
         @post.previous_step
       elsif @post.last_step?
+        @post.user_id = current_user.id 
         @post.update(post_params) if @post.all_elems_valid?
       else
         @post.next_step
@@ -135,6 +151,11 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+
+    if !(current_user.admin? || @post.user_id == current_user.id)
+        redirect_to posts_path, alert: 'You cannot delete articles that do not belong to you'
+    end
+
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
@@ -143,6 +164,11 @@ class PostsController < ApplicationController
   end
 
   def delete_image
+
+    if !(current_user.admin? || @post.user_id == current_user.id)
+      redirect_to posts_path, alert: 'Access denied'
+    end
+
     @post = Post.find(params[:id])
     @post.cover_image.destroy
     @post.save
