@@ -60,7 +60,7 @@ gem 'devise'
 # heroku dependencies
 gem 'rails_12factor', group: :production
 
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.1.0'
 
 gem 'owlcarousel-rails'
 
