@@ -10,27 +10,27 @@ class PostsController < ApplicationController
 
     if current_user.admin?
       if filter_field.nil?
-        @posts = Post.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+        @posts = Post.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
       else
         if filter_field == "section_id"
-          @posts = Post.search(params[:search]).where(section_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page]).paginate(:per_page => 15, :page => params[:page])
+          @posts = Post.search(params[:search]).where(section_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page]).paginate(:per_page => 10, :page => params[:page])
         elsif filter_field == "author"
-          @posts = Post.search(params[:search]).where(user_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+          @posts = Post.search(params[:search]).where(user_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
         elsif filter_field == "series_id"
-          @posts = Post.search(params[:search]).where(series_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+          @posts = Post.search(params[:search]).where(series_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
         end     
       end
       @users = User.all.order("id")
     else
       if filter_field.nil?
-        @posts = Post.search(params[:search]).where(user_id: current_user.id).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+        @posts = Post.search(params[:search]).where(user_id: current_user.id).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
       else
         if filter_field == "section_id"
-          @posts = Post.search(params[:search]).where(user_id: current_user.id).where(section_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+          @posts = Post.search(params[:search]).where(user_id: current_user.id).where(section_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
         elsif filter_field == "author"
-          @posts = Post.search(params[:search]).where(user_id: current_user.id).where(user_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+          @posts = Post.search(params[:search]).where(user_id: current_user.id).where(user_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
         elsif filter_field == "series_id"
-          @posts = Post.search(params[:search]).where(user_id: current_user.id).where(series_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+          @posts = Post.search(params[:search]).where(user_id: current_user.id).where(series_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 10, :page => params[:page])
         end     
       end
     end
