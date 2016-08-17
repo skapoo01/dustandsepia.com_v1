@@ -60,6 +60,13 @@ gem 'devise'
 # heroku dependencies
 gem 'rails_12factor', group: :production
 
+gem 'will_paginate', '3.0.pre2'
+
+gem 'owlcarousel-rails'
+
+gem 'omniauth-facebook'
+gem "koala", "~> 1.10.0rc"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

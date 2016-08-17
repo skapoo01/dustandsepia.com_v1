@@ -2,7 +2,7 @@
 
 <% if !@post.cover_image.size.nil? %>
 	<div class="post-show-page-cover" style="background-image: url('<%= @post.cover_image.url %>');">
-		<h1><%= @post.title %></h1>
+		<h1><%# @post.title %></h1>
 	</div>
 <% end %>
 
@@ -20,6 +20,14 @@
 		<%= button_to 'Edit', edit_post_path(@post), :method => "get" , :class => "ui right floated button"%> 
 		<%= button_to 'Back', posts_path, :method => "get", :class => "ui left floated button"%>
 	</div>
+
+</div>
+
+<div class="ui container" id="post-sharing-and-rating">
+
+</div>
+
+<div class="ui container" id="post-comments">
 
 </div>
 

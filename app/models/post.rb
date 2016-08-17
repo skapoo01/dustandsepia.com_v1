@@ -6,8 +6,10 @@ class Post < ActiveRecord::Base
 	validates_presence_of :summary, :if => :private_step?
 
   belongs_to :users
+  belongs_to :sections
 
-	def current_step
+
+	  def current_step
     		#@post = Post.find(params[:id])
     		@current_step || steps.first
   	end
@@ -54,6 +56,14 @@ class Post < ActiveRecord::Base
   	def hash_to_post(h)
   		h.each { |k, v| public_send("#{k}=", v)}
   	end
+
+    def self.search(search)
+      if search
+        where('title LIKE ?', "%#{search}%")
+      else
+        all
+      end
+    end
 
 end
   # what does attr_accessible do?

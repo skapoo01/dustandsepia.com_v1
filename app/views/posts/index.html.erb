@@ -1,23 +1,28 @@
+
+
 <div class="ui top attached menu">
 
     <div class="ui dropdown item">
       Actions
       <i class="dropdown icon"></i>
       <div class="menu">
-        <div class="item">Publish</div>
-        <div class="item">Hide</div>
-        <div class="item">Destroy</div>
-        <div class="item">Enable Commenting</div>
-        <div class="item">Disable Commenting</div>
+        <%= form_tag action_posts_path, :method => :get do %>
+        <%= submit_tag 'Publish', name: "publish_selected", class: "item" %>
+        <%= submit_tag 'Hide', name: "hide_selected", class: "item" %>
+        <%= submit_tag 'Enable Commenting', name: "enable_comments_for_selected", class: "item" %>
+        <%= submit_tag 'Disable Commenting', name: "disable_comments_for_selected", class: "item" %>
+        <%= submit_tag 'Delete', name: "delete_selected", class: "item" %>
         <% if current_user.admin? %>
-          <div class="item">Add to slider</div>
-          <div class="item">Clear slider</div>
-          <div class="item">Feature</div>
-          <%= link_to 'Create new user', new_user_registration_path, class: "item" %>
-          <%= link_to 'Users console', users_path, class: "item" %>
+          <div class="item">Add to Slider</div>
+          <div class="item">Clear Slider</div>
+          <%= link_to 'Create New User', new_user_registration_path, class: "item" %>
+          <div class="item">Create Section</div>
+          <div class="item">Create Series</div>
+          <%= link_to 'Go to Console', users_path, class: "item" %>
         <% end %>
         <% if user_signed_in? %>
           <%= link_to 'Sign Out', destroy_user_session_path, class: "item", :method => :delete %>
+        <% end %>
         <% end %>
       </div>
     </div>
@@ -26,19 +31,21 @@
       Navigate
       <i class="folder icon"></i>
       <div class="menu">
+        
         <div class="item">Sections
-            <div class="menu">
-            <div class="item">Fiction</div>
-            <div class="item">Non-Fiction</div>
-            <div class="item">Poetry</div>
-            <div class="item">Blog</div>
-            <div class="item">Web</div>
-            </div>
+          <div class="menu">
+            <% @sections.each do |section| %>  
+            <div class="item"><%# link_to section.title, posts_path, name: "section_#{section.id}"%><%= filterable(section, "section") %></div>
+            <% end %>
+            <div class="item"><%= filterable("All", "section") %></div>
+          </div>
         </div>
+
         <div class="item">Series
             <div class="menu">
             <div class="item">Immigration</div>
             <div class="item">Death on Rails</div>
+            <div class="item">All</div>
             </div>
         </div>
         
@@ -47,12 +54,14 @@
           <div class="item">Authors
               <div class="menu">
               <%  @users.each do |user| %>
-              <div class="item"><%= user.name %></div>
+              <div class="item"><%= filterable(user, "author") %></div>
               <% end %>
+              <div class="item"><%= filterable("All", "author") %></div>
               </div>
           </div>
         <% end %>
 
+        <div class="item"><%= filterable("Clear Filters", "reset") %></div>
 
       </div>
     </div>
@@ -63,10 +72,15 @@
       ;
     </script>
 
+    <%= form_tag posts_path, :method => 'get' do %>
     <div class="ui icon input">
       <i class="search icon"></i>
-      <input type="text" placeholder="Search...">
+      
+        <%= text_field_tag :search, params[:search] %>
+      
+      <!--input type="text" placeholder="Search..."-->
     </div>
+    <% end %>
 
     <div class="item" id="post-index-new-button">
     <%= link_to 'New', new_post_path %>
@@ -81,12 +95,13 @@
     <thead>
       <tr>
         <th id="checkbox"></th>
-        <th id="composed">Composed</th>
-        <th id="created">Created</th>
+        <th id="composed"><%= sortable "composed_on" %>
+        </th>
+        <th id="created"><%= sortable "created_at" %></th>
         <th id="description">Description</th>
         <th id="published">Published</th>
         <th id="commenting">Commenting</th>
-        <th id="rating">Rating</th>
+        <th id="rating"><%= sortable "rating" %></th>
       </tr>
     </thead>
 
@@ -94,9 +109,9 @@
       <% @posts.each do |post| %>
         <%# link_to(post) do %>
           <tr>
-            <td class="checkbox-column"><input type="checkbox"> <label></label></td>
-            <td class="created-column"><%= post.created_at.to_date.to_formatted_s(:long) %></td>
-            <td class="composed-column"><%= post.composed_on.to_formatted_s(:long) %></td>
+            <td class="checkbox-column"><%= check_box_tag "post_ids[]", post.id %></td>
+            <td class="created-column"><%= post.composed_on.to_formatted_s(:long) %></td>
+            <td class="composed-column"><%= post.created_at.to_date.to_formatted_s(:long) %></td>
             <td class="description-body">
               <h5><%= post.title %></h5>
               <div class="fr-view"><%= post.body.html_safe %></div>
@@ -114,23 +129,26 @@
             </td>
             <td>
               <div class="ui toggle checkbox">
-                <input type="checkbox">
+                <%= check_box_tag 'publish', post.id, post.publish %>
                 <label></label>
               </div>
             </td>
 
             <td>
               <div class="ui toggle checkbox">
-                <input type="checkbox">
+                <%= check_box_tag 'commenting', post.id, post.commenting %>
                 <label></label>
               </div>
             </td>
-            <td>x/10</td>
+            <td><%= post.rating %></td>
           </tr>
         <%# end %>
       <% end %>
     </tbody>
   </table>
-
   
 </div>
+
+<%= will_paginate @posts %>
+
+<%# end %>

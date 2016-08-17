@@ -16,15 +16,22 @@
 <div class="ui top fixed inverted borderless menu">
 
   <div class="item" id="dns-logo">
-    <%= link_to 'D&S', posts_path, :method => "get", :class => "logo"%>
+    <%= link_to 'D&S', root_path, :method => "get", :class => "logo"%>
+    <% if user_signed_in? %>
+    <%= link_to raw('<i class="icon settings"></i>'.html_safe), posts_path%>
+    <% end %>
   </div>
 
   <div class="ui inverted secondary pointing menu" id="sections-menu">
-    <a class="item">Fiction</a>
-    <a class="item">Non-Fiction</a>
-    <a class="item">Poetry</a>
-    <a class="active item">Blog</a>
-    <a class="item">Web</a>
+    <% sections = Section.all %>
+    <% sections.each do |section| %>
+    <% if params[:tab].to_i == section.id %>
+      <% tab_class_name = "active item" %>
+    <% else %>
+      <% tab_class_name = "item" %>
+    <% end %>
+    <%= link_to section.title, tabs_path(tab: section.id), class: tab_class_name, name: "#{section.title.downcase}" %>
+    <% end %>
   </div>
 
   <script>
@@ -84,7 +91,7 @@
   <div class="ui container" id="development-debuggers">
   	<%= debug(params) %>
   	<%# debug(session[:post_params]) %>
-  	<%# console %>
+  	<%= console %>
   </div>
 <% end %>
 

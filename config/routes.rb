@@ -1,16 +1,33 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :posts, :users
+  resources :users
 
-  root to: 'posts#index'
+  root to: "pages#home"
 
   get 'posts/:id/delete_image', to: 'posts#delete_image', as: 'remove_cover_image'
 
   devise_scope :user do
-    get 'captainmycaptain', to: 'devise/sessions#new'
+    get 'kafkaontheshore', to: 'devise/sessions#new'
   end
 
-  get "/:page" => "pages#show"
+  #get "/:page" => "pages#show"
+
+  get "/tabs" => "pages#tabs"
+
+  get "/home" => "pages#home"
+
+  resources :posts do
+    collection do
+      get :action
+    end
+
+    member do
+      get :publish
+      get :hide
+      get :enable_comments
+      get :disable_comments
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

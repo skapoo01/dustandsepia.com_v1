@@ -1,16 +1,40 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, :except => [:show]
-
+  helper_method :sort_column, :sort_direction
+  
   # GET /posts
   # GET /posts.json
   def index
+    @sections = Section.all
+
     if current_user.admin?
-      @posts = Post.all
+      if filter_field.nil?
+        @posts = Post.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+      else
+        if filter_field == "section_id"
+          @posts = Post.search(params[:search]).where(section_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page]).paginate(:per_page => 15, :page => params[:page])
+        elsif filter_field == "author"
+          @posts = Post.search(params[:search]).where(user_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+        elsif filter_field == "series_id"
+          @posts = Post.search(params[:search]).where(series_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+        end     
+      end
       @users = User.all.order("id")
     else
-      @posts = Post.where(user_id: current_user.id)
+      if filter_field.nil?
+        @posts = Post.search(params[:search]).where(user_id: current_user.id).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+      else
+        if filter_field == "section_id"
+          @posts = Post.search(params[:search]).where(user_id: current_user.id).where(section_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+        elsif filter_field == "author"
+          @posts = Post.search(params[:search]).where(user_id: current_user.id).where(user_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+        elsif filter_field == "series_id"
+          @posts = Post.search(params[:search]).where(user_id: current_user.id).where(series_id: filter_value.to_i).order(sort_column + ' ' + sort_direction).paginate(:per_page => 15, :page => params[:page])
+        end     
+      end
     end
+    
     #@posts = Post.all
     session.delete(:post_params)                    # In case back is pressed
     session.delete(:post_step)                      # remove sessions variables for post form
@@ -41,6 +65,7 @@ class PostsController < ApplicationController
     session[:post_params] = {}
     @post.first_step!                               
     session[:post_step] = @post.current_step
+    
   end
 
   # POST /posts
@@ -62,7 +87,8 @@ class PostsController < ApplicationController
   def create
     session[:post_params].deep_merge!(post_params.except(:cover_image)) if post_params
     tmp_img = post_params[:cover_image]
-    @post = Post.new(session[:post_params])         # NECESSARRY BECAUSE session may hold
+    @post = Post.new(session[:post_params])
+    @sections = Section.all         # NECESSARRY BECAUSE session may hold
     @post.cover_image = tmp_img                     # data from prior steps
     @post.current_step = session[:post_step]
     
@@ -117,6 +143,7 @@ class PostsController < ApplicationController
     @post.hash_to_post(session[:post_params])
     @post.cover_image = tmp_img 
     @post.current_step = session[:post_step]
+    @sections = Section.all
 
     if @post.valid?
       if params[:previous_button]
@@ -178,18 +205,61 @@ class PostsController < ApplicationController
     @post.current_step = session[:post_step]
     render 'edit'
   end
-  
+
+  def action
+
+
+    if !params[:post_ids].nil?
+      params[:post_ids].each do |id|
+        post = Post.find(id.to_i)
+
+        if params[:delete_selected]
+            post.destroy
+        elsif params[:publish_selected]
+            post.publish = true
+        elsif params[:hide_selected]
+            post.publish = false
+        elsif params[:enable_comments_for_selected]
+            post.commenting = true
+        elsif params[:disable_comments_for_selected]
+            post.commenting = false
+        end
+
+        post.save
+      end
+    end
+
+    redirect_to posts_path
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+        @post = Post.find(params[:id]) 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.fetch(:post, {}).permit(:title, :body, :composed_on, :summary, :author, :cover_image)
+      params.fetch(:post, {}).permit(:title, :body, :composed_on, :summary, :author, :cover_image, :section_id, :publish, :commenting)
     end
+
+    def sort_column
+      Post.column_names.include?(params[:sort]) ? params[:sort] : "composed_on"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+    end
+
+    def filter_field
+      Post.column_names.include?(params[:filter_by]) ? params[:filter_by] : nil
+    end
+
+    def filter_value 
+      params[:value]
+    end
+
 end
 
 __END__

@@ -1,8 +1,15 @@
 class PagesController < ApplicationController
+	include PagesHelper
 
-  def show
-    @posts = Post.all
-    render template: "pages/#{params[:page]}"
+  def home
+  	@posts = Post.all
   end
+
+  def tabs
+  	@posts = Post.where(:section_id => params[:tab].to_i)
+    	@sections = Section.all
+  end
+
+  
 
 end

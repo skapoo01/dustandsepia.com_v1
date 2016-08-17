@@ -26,6 +26,36 @@
   <%= f.text_area :summary, :id => "post-summary-editor" %>
 </div>
 
+
+<div class="field">
+<%= f.label :section_id %>
+<div class="ui selection dropdown">
+  <%= f.hidden_field :section_id %>
+  <i class="dropdown icon"></i>
+  <div class="default text">None</div>
+  <div class="menu">
+    <% @sections.each do |section| %>
+    <div class="item" data-value="<%= section.id %>"><%= section.title %></div>
+    <% end %>
+  </div>
+</div>
+</div>
+
+
+<div class="inline fields">
+  <%= f.label :publish %>
+  <div class="ui toggle checkbox">
+    <%= f.check_box :publish %>
+    <label></label>
+  </div>
+  
+  <%= f.label :commenting %>
+  <div class="ui toggle checkbox">
+    <%= f.check_box :commenting %>
+    <label></label>
+  </div>
+</div>
+
 <script>
 $(function() {
   $('#post-summary-editor').froalaEditor({
@@ -34,4 +64,6 @@ $(function() {
 });
 
 //$('.cover_image_preview').height(<%  %>);
+$('.ui.dropdown').dropdown();
+
 </script>

@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20160713045609_add_columns_to_posts.rb
